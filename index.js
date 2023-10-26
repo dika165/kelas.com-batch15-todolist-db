@@ -1,18 +1,21 @@
 /*
-    1. Buat function untuk update data user;
-    2. buat function untuk delete data user;
-    3. modifikasi function create user, yang return nya adalah menampilkan data yang
+    1. Buat endpoint untuk update data user, dan buat responsenya berupa object user yang di update;
+    3. modifiksi function create user, yang return nya adalah menampilkan object data yang
        telah di tambahkan.
 */
 import * as UserService from './services/user.js';
+import express from 'express';
 
-// console.log("ambil data user: ")
-// await UserService.getUser();
+const port = 8080;
+const host = "localhost";
+const app = express();
+app.use(express.json());
+app.get("/users",UserService.getUser);
+app.get("/users/:id", UserService.getUserDetail);
+app.post("/users", UserService.createUser);
+app.delete("/users/:id", UserService.deleteUser);
 
-// console.log("create data user: ");
-// await UserService.createUser("Andika E. Wiyatno", "dika@gmail.com", "pass1234");
-// await UserService.createUser("Rovi Fauzan", "rovi@gmail.com", "pass1234");
 
-// console.log("ambil data user: ")
-// await UserService.getUser();
-
+app.listen(port, host, () => {
+    console.log(`Server berjalan di http://${host}:${port}`);
+});

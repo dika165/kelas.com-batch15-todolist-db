@@ -21,4 +21,9 @@ const getDataById = (id) => {
     return dbPool.query(query, [id]);
 }
 
-export { getData, createData, getDataById }
+const deleteData = (id) => {
+    const query = "DELETE FROM users WHERE user_id = ?";
+    
+    return dbPool.query(query, [id]);
+}
+export { getData, createData, getDataById, deleteData }
